@@ -1,0 +1,29 @@
+.item {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border: 1px solid #1eca55;
+}
+
+/* .jtk-endpoint circle{
+    fill: transparent;
+} */
+
+/* jtk-endpoint:hover circle{
+    fill: unset;
+} */
+
+/* .item:hover {
+    border: 3px solid yellow;
+}
+
+.item:hover .jtk-endpoint {
+    display: none;
+} */
+
+.end_point_hover {
+    border: 3px solid yellow;
+}
+.jtk-endpoint {
+    top: -10px;
+}
