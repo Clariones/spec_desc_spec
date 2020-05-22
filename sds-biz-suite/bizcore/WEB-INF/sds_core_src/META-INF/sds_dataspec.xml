@@ -1,0 +1,378 @@
+<?xml version='1.0'?>
+<root schema_name="sds">
+
+	<table name="platform_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="2" max="28" description="名称" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="last_update_time" type="date_time_update" checkType="DateTimeUpdate" min="1900-01-01T00:00:00" max="updateTime()" description="最后更新时间" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="company_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="2" max="16" description="名称" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="platform" type="reference" checkType="exist(platform)" description="平台" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="user_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="12" description="名称" />
+			<field name="join_time" type="date" checkType="DateRange" min="1900-01-01" max="2199-01-01" description="加入时间" />
+			<field name="company" type="reference" checkType="exist(company)" description="公司" />
+			<field name="title" type="string" checkType="StringLengthRange" min="1" max="24" description="标题" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="user_project_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="user" type="reference" checkType="exist(user)" description="用户" />
+			<field name="project" type="reference" checkType="exist(project)" description="项目" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="last_update_time" type="date_time_update" checkType="DateTimeUpdate" min="1900-01-01T00:00:00" max="updateTime()" description="最后更新时间" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="change_request_type_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="100" description="名称" />
+			<field name="code" type="string" checkType="StringLengthRange" min="1" max="100" description="编码" />
+			<field name="icon" type="string" checkType="StringLengthRange" min="1" max="100" description="图标" />
+			<field name="display_order" type="int" checkType="IntegerRange" min="0" max="6" description="顺序" />
+			<field name="bind_types" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="绑定类型" />
+			<field name="step_configuration" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="分步配置" />
+			<field name="platform" type="reference" checkType="exist(platform)" description="平台" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="change_request_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="50" description="名称" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="remote_ip" type="string_client_ip" checkType="ClientIp" min="5" max="40" description="访问IP" />
+			<field name="request_type" type="reference" checkType="exist(change_request_type)" description="请求类型" />
+			<field name="commited" type="bool" checkType="BooleanRange" min="0" max="false" description="通过对" />
+			<field name="platform" type="reference" checkType="exist(platform)" description="平台" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="event_update_profile_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="30" description="名称" />
+			<field name="avantar" type="string_image" checkType="Image" min="0" max="1" description="Avantar" />
+			<field name="field_group" type="string" checkType="StringLengthRange" min="5" max="100" description="字段组" />
+			<field name="event_initiator_type" type="string" checkType="StringLengthRange" min="1" max="64" description="事件引发剂类型" />
+			<field name="event_initiator_id" type="string" checkType="StringLengthRange" min="1" max="64" description="活动发起者Id" />
+			<field name="change_request" type="reference" checkType="exist(change_request)" description="变更请求" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="project_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="12" description="名称" />
+			<field name="company" type="reference" checkType="exist(company)" description="公司" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="page_flow_spec_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="scene" type="string" checkType="StringLengthRange" min="1" max="8" description="场景" />
+			<field name="brief" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="短暂的" />
+			<field name="owner" type="reference" checkType="exist(user)" description="所有人" />
+			<field name="project" type="reference" checkType="exist(project)" description="项目" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="work_flow_spec_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="scene" type="string" checkType="StringLengthRange" min="1" max="8" description="场景" />
+			<field name="brief" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="短暂的" />
+			<field name="owner" type="reference" checkType="exist(user)" description="所有人" />
+			<field name="project" type="reference" checkType="exist(project)" description="项目" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="change_request_spec_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="scene" type="string" checkType="StringLengthRange" min="1" max="8" description="场景" />
+			<field name="brief" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="短暂的" />
+			<field name="owner" type="reference" checkType="exist(user)" description="所有人" />
+			<field name="project" type="reference" checkType="exist(project)" description="项目" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="page_content_spec_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="scene" type="string" checkType="StringLengthRange" min="1" max="8" description="场景" />
+			<field name="brief" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="短暂的" />
+			<field name="owner" type="reference" checkType="exist(user)" description="所有人" />
+			<field name="project" type="reference" checkType="exist(project)" description="项目" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="mobile_app_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="2" max="20" description="名称" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="page_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="page_title" type="string" checkType="StringLengthRange" min="1" max="10" description="页面标题" />
+			<field name="link_to_url" type="string" checkType="StringLengthRange" min="0" max="512" description="链接网址" />
+			<field name="page_type" type="reference" checkType="exist(page_type)" description="页面类型" />
+			<field name="display_order" type="int" checkType="IntegerRange" min="0" max="10000" description="顺序" />
+			<field name="mobile_app" type="reference" checkType="exist(mobile_app)" description="手机应用程序" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="page_type_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="40" description="名称" />
+			<field name="code" type="string" checkType="StringLengthRange" min="1" max="40" description="编码" />
+			<field name="mobile_app" type="reference" checkType="exist(mobile_app)" description="手机应用程序" />
+			<field name="footer_tab" type="bool" checkType="BooleanRange" min="0" max="true|false" description="页脚选项卡" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="slide_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="0" max="40" description="名称" />
+			<field name="display_order" type="int" checkType="IntegerRange" min="0" max="10000" description="顺序" />
+			<field name="image_url" type="string_image" checkType="Image" min="0" max="512" description="图片链接" />
+			<field name="video_url" type="string_image" checkType="Image" min="0" max="512" description="视频网址" />
+			<field name="link_to_url" type="string" checkType="StringLengthRange" min="0" max="512" description="链接网址" />
+			<field name="page" type="reference" checkType="exist(page)" description="页面" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="ui_action_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="code" type="string" checkType="StringLengthRange" min="1" max="40" description="编码" />
+			<field name="icon" type="string" checkType="StringLengthRange" min="1" max="512" description="图标" />
+			<field name="title" type="string" checkType="StringLengthRange" min="1" max="40" description="标题" />
+			<field name="display_order" type="int" checkType="IntegerRange" min="0" max="10000" description="顺序" />
+			<field name="brief" type="string" checkType="StringLengthRange" min="0" max="200" description="短暂的" />
+			<field name="image_url" type="string_image" checkType="Image" min="0" max="512" description="图片链接" />
+			<field name="link_to_url" type="string" checkType="StringLengthRange" min="0" max="512" description="链接网址" />
+			<field name="extra_data" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="额外的数据" />
+			<field name="page" type="reference" checkType="exist(page)" description="页面" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="section_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="title" type="string" checkType="StringLengthRange" min="1" max="40" description="标题" />
+			<field name="brief" type="string" checkType="StringLengthRange" min="0" max="200" description="短暂的" />
+			<field name="icon" type="string_image" checkType="Image" min="0" max="512" description="图标" />
+			<field name="display_order" type="int" checkType="IntegerRange" min="0" max="10000" description="顺序" />
+			<field name="view_group" type="string" checkType="StringLengthRange" min="0" max="40" description="视图组" />
+			<field name="link_to_url" type="string" checkType="StringLengthRange" min="0" max="512" description="链接网址" />
+			<field name="page" type="reference" checkType="exist(page)" description="页面" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="user_domain_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="2" max="16" description="名称" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="user_white_list_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="user_identity" type="string" checkType="StringLengthRange" min="1" max="40" description="用户身份" />
+			<field name="user_special_functions" type="string" checkType="StringLengthRange" min="1" max="200" description="用户特殊功能" />
+			<field name="domain" type="reference" checkType="exist(user_domain)" description="域" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="sec_user_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="login" type="string" checkType="StringLengthRange" min="0" max="256" description="登录" />
+			<field name="mobile" type="string_china_mobile_phone" checkType="ChinaMobilePhone" min="0" max="11" description="手机号码" />
+			<field name="email" type="string_email" checkType="Email" min="0" max="256" description="电子邮件" />
+			<field name="pwd" type="string_password" checkType="Password" min="3" max="28" description="密码" />
+			<field name="weixin_openid" type="string" checkType="StringLengthRange" min="0" max="128" description="微信openid" />
+			<field name="weixin_appid" type="string" checkType="StringLengthRange" min="0" max="128" description="微信Appid" />
+			<field name="access_token" type="string" checkType="StringLengthRange" min="0" max="128" description="访问令牌" />
+			<field name="verification_code" type="int" checkType="IntegerRange" min="0" max="9999999" description="验证码" />
+			<field name="verification_code_expire" type="date_time" checkType="DateTime" min="1900-01-01T00:00:00" max="2099-12-31T09:09:09" description="验证码过期" />
+			<field name="last_login_time" type="date_time" checkType="DateTime" min="1900-01-01T00:00:00" max="2099-12-31T09:09:09" description="最后登录时间" />
+			<field name="domain" type="reference" checkType="exist(user_domain)" description="域" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="user_app_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="title" type="string" checkType="StringLengthRange" min="1" max="300" description="标题" />
+			<field name="sec_user" type="reference" checkType="exist(sec_user)" description="安全用户" />
+			<field name="app_icon" type="string" checkType="StringLengthRange" min="2" max="36" description="应用程序图标" />
+			<field name="full_access" type="bool" checkType="BooleanRange" min="0" max="true" description="完全访问" />
+			<field name="permission" type="string" checkType="StringLengthRange" min="2" max="16" description="许可" />
+			<field name="object_type" type="string" checkType="StringLengthRange" min="1" max="100" description="访问对象类型" />
+			<field name="object_id" type="string" checkType="StringLengthRange" min="4" max="40" description="对象ID" />
+			<field name="location" type="string" checkType="StringLengthRange" min="4" max="48" description="位置" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="quick_link_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="200" description="名称" />
+			<field name="icon" type="string" checkType="StringLengthRange" min="1" max="200" description="图标" />
+			<field name="image_path" type="string_image" checkType="Image" min="0" max="512" description="图片路径" />
+			<field name="link_target" type="string" checkType="StringLengthRange" min="1" max="200" description="链接的目标" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="app" type="reference" checkType="exist(user_app)" description="应用程序" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="list_access_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="200" description="名称" />
+			<field name="internal_name" type="string" checkType="StringLengthRange" min="1" max="200" description="内部名称" />
+			<field name="read_permission" type="bool" checkType="BooleanRange" min="0" max="true" description="读权限" />
+			<field name="create_permission" type="bool" checkType="BooleanRange" min="0" max="true" description="创建权限" />
+			<field name="delete_permission" type="bool" checkType="BooleanRange" min="0" max="true" description="删除权限" />
+			<field name="update_permission" type="bool" checkType="BooleanRange" min="0" max="true" description="更新权限" />
+			<field name="execution_permission" type="bool" checkType="BooleanRange" min="0" max="true" description="执行权限" />
+			<field name="app" type="reference" checkType="exist(user_app)" description="应用程序" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="login_history_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="login_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="登录时间" />
+			<field name="from_ip" type="string" checkType="StringLengthRange" min="5" max="44" description="来自IP" />
+			<field name="description" type="string" checkType="StringLengthRange" min="2" max="16" description="描述" />
+			<field name="sec_user" type="reference" checkType="exist(sec_user)" description="安全用户" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="candidate_container_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="2" max="28" description="名称" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="candidate_element_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="200" description="名称" />
+			<field name="type" type="string" checkType="StringLengthRange" min="1" max="200" description="类型" />
+			<field name="image" type="string_image" checkType="Image" min="0" max="512" description="图片" />
+			<field name="container" type="reference" checkType="exist(candidate_container)" description="容器" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="wechat_workapp_identity_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="corp_id" type="string" checkType="StringLengthRange" min="0" max="100" description="公司标识" />
+			<field name="user_id" type="string" checkType="StringLengthRange" min="1" max="100" description="用户Id" />
+			<field name="sec_user" type="reference" checkType="exist(sec_user)" description="安全用户" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="last_login_time" type="date_time" checkType="DateTime" min="1900-01-01T00:00:00" max="2100-01-01T00:00:00" description="最后登录时间" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="wechat_miniapp_identity_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="open_id" type="string" checkType="StringLengthRange" min="5" max="128" description="开放Id" />
+			<field name="app_id" type="string" checkType="StringLengthRange" min="5" max="128" description="应用程序Id" />
+			<field name="sec_user" type="reference" checkType="exist(sec_user)" description="安全用户" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="last_login_time" type="date_time" checkType="DateTime" min="1900-01-01T00:00:00" max="2100-01-01T00:00:00" description="最后登录时间" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="keypair_identity_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="public_key" type="string_longtext" checkType="Longtext" min="0" max="1048576" description="公钥" />
+			<field name="key_type" type="reference" checkType="exist(public_key_type)" description="密钥类型" />
+			<field name="sec_user" type="reference" checkType="exist(sec_user)" description="安全用户" />
+			<field name="create_time" type="date_time_create" checkType="DateTimeCreate" min="1900-01-01T00:00:00" max="createTime()" description="创建时间" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="public_key_type_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="name" type="string" checkType="StringLengthRange" min="1" max="12" description="名称" />
+			<field name="code" type="string" checkType="StringLengthRange" min="1" max="12" description="编码" />
+			<field name="domain" type="reference" checkType="exist(user_domain)" description="域" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+	<table name="tree_node_data">
+		<fields>
+			<field name="id" nullable="false" type="string" checkType="StringLengthRange" min="2" max="64" description="ID" />
+			<field name="node_id" type="string" checkType="StringLengthRange" min="3" max="40" description="节点Id" />
+			<field name="node_type" type="string" checkType="StringLengthRange" min="3" max="32" description="节点类型" />
+			<field name="left_value" type="int" checkType="IntegerRange" min="1" max="10000000" description="左值" />
+			<field name="right_value" type="int" checkType="IntegerRange" min="2" max="10000000" description="正确的价值" />
+			<field name="version" type="int" checkType="IntegerRange" min="0" max="Integer.MAX_VALUE" description="版本" />
+		</fields>
+	</table>
+
+</root>

@@ -1,0 +1,283 @@
+Summary|概览
+Platform|平台
+Id|ID
+Name|名称
+Create Time|创建时间
+Last Update Time|最后更新时间
+Version|版本
+Company|公司
+Id|ID
+Name|名称
+Create Time|创建时间
+Platform|平台
+Version|版本
+User|用户
+Id|ID
+Name|名称
+Join Time|加入时间
+Company|公司
+Title|标题
+Version|版本
+User Project|用户项目
+Id|ID
+User|用户
+Project|项目
+Create Time|创建时间
+Last Update Time|最后更新时间
+Version|版本
+Change Request Type|变更请求类型
+Id|ID
+Name|名称
+Code|编码
+Icon|图标
+Display Order|顺序
+Bind Types|绑定类型
+Step Configuration|分步配置
+Platform|平台
+Version|版本
+Change Request|变更请求
+Id|ID
+Name|名称
+Create Time|创建时间
+Remote Ip|访问IP
+Request Type|请求类型
+Commited|通过对
+Platform|平台
+Version|版本
+Event Update Profile|事件更新概要
+Id|ID
+Name|名称
+Avantar|Avantar
+Field Group|字段组
+Event Initiator Type|事件引发剂类型
+Event Initiator Id|活动发起者Id
+Change Request|变更请求
+Version|版本
+Project|项目
+Id|ID
+Name|名称
+Company|公司
+Version|版本
+Page Flow Spec|页面流程规范
+Id|ID
+Scene|场景
+Brief|短暂的
+Owner|所有人
+Project|项目
+Version|版本
+Work Flow Spec|工作流程规范
+Id|ID
+Scene|场景
+Brief|短暂的
+Owner|所有人
+Project|项目
+Version|版本
+Change Request Spec|变更请求规范
+Id|ID
+Scene|场景
+Brief|短暂的
+Owner|所有人
+Project|项目
+Version|版本
+Page Content Spec|页面内容规范
+Id|ID
+Scene|场景
+Brief|短暂的
+Owner|所有人
+Project|项目
+Version|版本
+Mobile App|手机应用程序
+Id|ID
+Name|名称
+Version|版本
+Page|页面
+Id|ID
+Page Title|页面标题
+Link To Url|链接网址
+Page Type|页面类型
+Display Order|顺序
+Mobile App|手机应用程序
+Version|版本
+Page Type|页面类型
+Id|ID
+Name|名称
+Code|编码
+Mobile App|手机应用程序
+Footer Tab|页脚选项卡
+Version|版本
+Slide|轮播内容
+Id|ID
+Name|名称
+Display Order|顺序
+Image Url|图片链接
+Video Url|视频网址
+Link To Url|链接网址
+Page|页面
+Version|版本
+Ui Action|用户界面操作
+Id|ID
+Code|编码
+Icon|图标
+Title|标题
+Display Order|顺序
+Brief|短暂的
+Image Url|图片链接
+Link To Url|链接网址
+Extra Data|额外的数据
+Page|页面
+Version|版本
+Section|板块
+Id|ID
+Title|标题
+Brief|短暂的
+Icon|图标
+Display Order|顺序
+View Group|视图组
+Link To Url|链接网址
+Page|页面
+Version|版本
+User Domain|用户域
+Id|ID
+Name|名称
+Version|版本
+User White List|用户白名单
+Id|ID
+User Identity|用户身份
+User Special Functions|用户特殊功能
+Domain|域
+Version|版本
+Sec User|安全用户
+Id|ID
+Login|登录
+Mobile|手机号码
+Email|电子邮件
+Pwd|密码
+Weixin Openid|微信openid
+Weixin Appid|微信Appid
+Access Token|访问令牌
+Verification Code|验证码
+Verification Code Expire|验证码过期
+Last Login Time|最后登录时间
+Domain|域
+Version|版本
+User App|用户应用程序
+Id|ID
+Title|标题
+Sec User|安全用户
+App Icon|应用程序图标
+Full Access|完全访问
+Permission|许可
+Object Type|访问对象类型
+Object Id|对象ID
+Location|位置
+Version|版本
+Quick Link|快速链接
+Id|ID
+Name|名称
+Icon|图标
+Image Path|图片路径
+Link Target|链接的目标
+Create Time|创建时间
+App|应用程序
+Version|版本
+List Access|访问列表
+Id|ID
+Name|名称
+Internal Name|内部名称
+Read Permission|读权限
+Create Permission|创建权限
+Delete Permission|删除权限
+Update Permission|更新权限
+Execution Permission|执行权限
+App|应用程序
+Version|版本
+Login History|登录历史
+Id|ID
+Login Time|登录时间
+From Ip|来自IP
+Description|描述
+Sec User|安全用户
+Version|版本
+Candidate Container|候选人容器
+Id|ID
+Name|名称
+Version|版本
+Candidate Element|候选人元素
+Id|ID
+Name|名称
+Type|类型
+Image|图片
+Container|容器
+Version|版本
+Wechat Workapp Identity|微信Workapp身份
+Id|ID
+Corp Id|公司标识
+User Id|用户Id
+Sec User|安全用户
+Create Time|创建时间
+Last Login Time|最后登录时间
+Version|版本
+Wechat Miniapp Identity|微信Miniapp身份
+Id|ID
+Open Id|开放Id
+App Id|应用程序Id
+Sec User|安全用户
+Create Time|创建时间
+Last Login Time|最后登录时间
+Version|版本
+Keypair Identity|密钥对身份
+Id|ID
+Public Key|公钥
+Key Type|密钥类型
+Sec User|安全用户
+Create Time|创建时间
+Version|版本
+Public Key Type|公共密钥类型
+Id|ID
+Name|名称
+Code|编码
+Domain|域
+Version|版本
+Tree Node|树节点
+Id|ID
+Node Id|节点Id
+Node Type|节点类型
+Left Value|左值
+Right Value|正确的价值
+Version|版本
+Transfer to Another Platform|转到平台
+Transfer to Another Company|转移到公司
+Transfer to Another User|转移到用户
+Transfer to Another Project|转移到项目
+Transfer to Another Platform|转到平台
+Transfer to Another Request Type|转换为请求类型
+Transfer to Another Platform|转到平台
+Transfer to Another Change Request|转换到更改请求
+Transfer to Another Company|转移到公司
+Transfer to Another Owner|转到老板
+Transfer to Another Project|转移到项目
+Transfer to Another Owner|转到老板
+Transfer to Another Project|转移到项目
+Transfer to Another Owner|转到老板
+Transfer to Another Project|转移到项目
+Transfer to Another Owner|转到老板
+Transfer to Another Project|转移到项目
+Transfer to Another Page Type|转换为页面类型
+Transfer to Another Mobile App|转移到移动App
+Transfer to Another Mobile App|转移到移动App
+Transfer to Another Page|转到页
+Transfer to Another Page|转到页
+Transfer to Another Page|转到页
+Transfer to Another Domain|转移到域
+Transfer to Another Domain|转移到域
+Transfer to Another Sec User|传输给Sec用户
+Transfer to Another App|转移到应用程序
+Transfer to Another App|转移到应用程序
+Transfer to Another Sec User|传输给Sec用户
+Transfer to Another Container|转移到容器
+Transfer to Another Sec User|传输给Sec用户
+Transfer to Another Sec User|传输给Sec用户
+Transfer to Another Key Type|转换为键类型
+Transfer to Another Sec User|传输给Sec用户
+Transfer to Another Domain|转移到域
+

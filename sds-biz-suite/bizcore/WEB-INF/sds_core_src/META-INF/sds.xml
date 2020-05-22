@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- Enable Annotation based Declarative Transaction Management -->
+
+  <bean id="modelService" class="com.cla.sds.ModelService"/>
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+  	  <property name="poolName" value="sds_connection_pool" />
+  	  <property name="dataSourceClassName" value="${app.database.dataSourceClassName}"/>
+  	  <property name="maximumPoolSize" value="10" />
+  	  <property name="maxLifetime" value="60000" />
+  	  <property name="idleTimeout" value="30000" />
+  	  <property name="dataSourceProperties">
+  	   <props>
+  	     <prop key="url">${app.database.jdbcURL}</prop>
+  	     <prop key="user">${app.database.username}</prop>
+  	     <prop key="password">${app.database.password}</prop>
+  	   </props>
+  	  </property>
+  	</bean>
+
+
+	<!-- dbcp 2.6 https://commons.apache.org/proper/commons-dbcp/configuration.html
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <property name="poolName" value="sds_connection_pool" />
+	  <property name="dataSourceClassName" value="${app.database.dataSourceClassName}"/>
+	  <property name="maximumPoolSize" value="10" />
+	  <property name="maxLifetime" value="60000" />
+	  <property name="idleTimeout" value="30000" />
+	  <property name="dataSourceProperties">
+	   <props>
+	     <prop key="url">${app.database.jdbcURL}</prop>
+	     <prop key="user">${app.database.username}</prop>
+	     <prop key="password">${app.database.password}</prop>
+	     <prop key="prepStmtCacheSize">250</prop>
+	     <prop key="prepStmtCacheSqlLimit">2048</prop>
+	     <prop key="cachePrepStmts">true</prop>
+	     <prop key="useServerPrepStmts">true</prop>
+	   </props>
+	  </property>
+	</bean>
+	-->
+
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	  <constructor-arg ref="hikariConfig" />
+	</bean>
+
+
+	<bean id="platformDAOBase" class="com.cla.sds.platform.PlatformJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="companyDAO" ref="companyDAO" />
+		
+		<property name="changeRequestTypeDAO" ref="changeRequestTypeDAO" />
+		
+		<property name="changeRequestDAO" ref="changeRequestDAO" />
+		
+	</bean>
+	<bean id="platformDAO" parent="platformDAOBase"></bean>
+	
+
+	<bean id="companyDAOBase" class="com.cla.sds.company.CompanyJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="platformDAO" ref="platformDAO" />
+		<property name="userDAO" ref="userDAO" />
+		
+		<property name="projectDAO" ref="projectDAO" />
+		
+	</bean>
+	<bean id="companyDAO" parent="companyDAOBase"></bean>
+	
+
+	<bean id="userDAOBase" class="com.cla.sds.user.UserJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="companyDAO" ref="companyDAO" />
+		<property name="userProjectDAO" ref="userProjectDAO" />
+		
+		<property name="pageFlowSpecDAO" ref="pageFlowSpecDAO" />
+		
+		<property name="workFlowSpecDAO" ref="workFlowSpecDAO" />
+		
+		<property name="changeRequestSpecDAO" ref="changeRequestSpecDAO" />
+		
+		<property name="pageContentSpecDAO" ref="pageContentSpecDAO" />
+		
+	</bean>
+	<bean id="userDAO" parent="userDAOBase"></bean>
+	
+
+	<bean id="userProjectDAOBase" class="com.cla.sds.userproject.UserProjectJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDAO" ref="userDAO" /><property name="projectDAO" ref="projectDAO" />
+	</bean>
+	<bean id="userProjectDAO" parent="userProjectDAOBase"></bean>
+	
+
+	<bean id="changeRequestTypeDAOBase" class="com.cla.sds.changerequesttype.ChangeRequestTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="platformDAO" ref="platformDAO" />
+		<property name="changeRequestDAO" ref="changeRequestDAO" />
+		
+	</bean>
+	<bean id="changeRequestTypeDAO" parent="changeRequestTypeDAOBase"></bean>
+	
+
+	<bean id="changeRequestDAOBase" class="com.cla.sds.changerequest.ChangeRequestJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="changeRequestTypeDAO" ref="changeRequestTypeDAO" /><property name="platformDAO" ref="platformDAO" />
+		<property name="eventUpdateProfileDAO" ref="eventUpdateProfileDAO" />
+		
+	</bean>
+	<bean id="changeRequestDAO" parent="changeRequestDAOBase"></bean>
+	
+
+	<bean id="eventUpdateProfileDAOBase" class="com.cla.sds.eventupdateprofile.EventUpdateProfileJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="changeRequestDAO" ref="changeRequestDAO" />
+	</bean>
+	<bean id="eventUpdateProfileDAO" parent="eventUpdateProfileDAOBase"></bean>
+	
+
+	<bean id="projectDAOBase" class="com.cla.sds.project.ProjectJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="companyDAO" ref="companyDAO" />
+		<property name="userProjectDAO" ref="userProjectDAO" />
+		
+		<property name="pageFlowSpecDAO" ref="pageFlowSpecDAO" />
+		
+		<property name="workFlowSpecDAO" ref="workFlowSpecDAO" />
+		
+		<property name="changeRequestSpecDAO" ref="changeRequestSpecDAO" />
+		
+		<property name="pageContentSpecDAO" ref="pageContentSpecDAO" />
+		
+	</bean>
+	<bean id="projectDAO" parent="projectDAOBase"></bean>
+	
+
+	<bean id="pageFlowSpecDAOBase" class="com.cla.sds.pageflowspec.PageFlowSpecJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="projectDAO" ref="projectDAO" /><property name="userDAO" ref="userDAO" />
+	</bean>
+	<bean id="pageFlowSpecDAO" parent="pageFlowSpecDAOBase"></bean>
+	
+
+	<bean id="workFlowSpecDAOBase" class="com.cla.sds.workflowspec.WorkFlowSpecJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="projectDAO" ref="projectDAO" /><property name="userDAO" ref="userDAO" />
+	</bean>
+	<bean id="workFlowSpecDAO" parent="workFlowSpecDAOBase"></bean>
+	
+
+	<bean id="changeRequestSpecDAOBase" class="com.cla.sds.changerequestspec.ChangeRequestSpecJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="projectDAO" ref="projectDAO" /><property name="userDAO" ref="userDAO" />
+	</bean>
+	<bean id="changeRequestSpecDAO" parent="changeRequestSpecDAOBase"></bean>
+	
+
+	<bean id="pageContentSpecDAOBase" class="com.cla.sds.pagecontentspec.PageContentSpecJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="projectDAO" ref="projectDAO" /><property name="userDAO" ref="userDAO" />
+	</bean>
+	<bean id="pageContentSpecDAO" parent="pageContentSpecDAOBase"></bean>
+	
+
+	<bean id="mobileAppDAOBase" class="com.cla.sds.mobileapp.MobileAppJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="pageDAO" ref="pageDAO" />
+		
+		<property name="pageTypeDAO" ref="pageTypeDAO" />
+		
+	</bean>
+	<bean id="mobileAppDAO" parent="mobileAppDAOBase"></bean>
+	
+
+	<bean id="pageDAOBase" class="com.cla.sds.page.PageJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="pageTypeDAO" ref="pageTypeDAO" /><property name="mobileAppDAO" ref="mobileAppDAO" />
+		<property name="slideDAO" ref="slideDAO" />
+		
+		<property name="uiActionDAO" ref="uiActionDAO" />
+		
+		<property name="sectionDAO" ref="sectionDAO" />
+		
+	</bean>
+	<bean id="pageDAO" parent="pageDAOBase"></bean>
+	
+
+	<bean id="pageTypeDAOBase" class="com.cla.sds.pagetype.PageTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="mobileAppDAO" ref="mobileAppDAO" />
+		<property name="pageDAO" ref="pageDAO" />
+		
+	</bean>
+	<bean id="pageTypeDAO" parent="pageTypeDAOBase"></bean>
+	
+
+	<bean id="slideDAOBase" class="com.cla.sds.slide.SlideJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="pageDAO" ref="pageDAO" />
+	</bean>
+	<bean id="slideDAO" parent="slideDAOBase"></bean>
+	
+
+	<bean id="uiActionDAOBase" class="com.cla.sds.uiaction.UiActionJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="pageDAO" ref="pageDAO" />
+	</bean>
+	<bean id="uiActionDAO" parent="uiActionDAOBase"></bean>
+	
+
+	<bean id="sectionDAOBase" class="com.cla.sds.section.SectionJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="pageDAO" ref="pageDAO" />
+	</bean>
+	<bean id="sectionDAO" parent="sectionDAOBase"></bean>
+	
+
+	<bean id="userDomainDAOBase" class="com.cla.sds.userdomain.UserDomainJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="userWhiteListDAO" ref="userWhiteListDAO" />
+		
+		<property name="secUserDAO" ref="secUserDAO" />
+		
+		<property name="publicKeyTypeDAO" ref="publicKeyTypeDAO" />
+		
+	</bean>
+	<bean id="userDomainDAO" parent="userDomainDAOBase"></bean>
+	
+
+	<bean id="userWhiteListDAOBase" class="com.cla.sds.userwhitelist.UserWhiteListJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+	</bean>
+	<bean id="userWhiteListDAO" parent="userWhiteListDAOBase"></bean>
+	
+
+	<bean id="secUserDAOBase" class="com.cla.sds.secuser.SecUserJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+		<property name="userAppDAO" ref="userAppDAO" />
+		
+		<property name="loginHistoryDAO" ref="loginHistoryDAO" />
+		
+		<property name="wechatWorkappIdentityDAO" ref="wechatWorkappIdentityDAO" />
+		
+		<property name="wechatMiniappIdentityDAO" ref="wechatMiniappIdentityDAO" />
+		
+		<property name="keypairIdentityDAO" ref="keypairIdentityDAO" />
+		
+	</bean>
+	<bean id="secUserDAO" parent="secUserDAOBase"></bean>
+	
+
+	<bean id="userAppDAOBase" class="com.cla.sds.userapp.UserAppJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+		<property name="quickLinkDAO" ref="quickLinkDAO" />
+		
+		<property name="listAccessDAO" ref="listAccessDAO" />
+		
+	</bean>
+	<bean id="userAppDAO" parent="userAppDAOBase"></bean>
+	
+
+	<bean id="quickLinkDAOBase" class="com.cla.sds.quicklink.QuickLinkJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="quickLinkDAO" parent="quickLinkDAOBase"></bean>
+	
+
+	<bean id="listAccessDAOBase" class="com.cla.sds.listaccess.ListAccessJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userAppDAO" ref="userAppDAO" />
+	</bean>
+	<bean id="listAccessDAO" parent="listAccessDAOBase"></bean>
+	
+
+	<bean id="loginHistoryDAOBase" class="com.cla.sds.loginhistory.LoginHistoryJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="loginHistoryDAO" parent="loginHistoryDAOBase"></bean>
+	
+
+	<bean id="candidateContainerDAOBase" class="com.cla.sds.candidatecontainer.CandidateContainerJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+		<property name="candidateElementDAO" ref="candidateElementDAO" />
+		
+	</bean>
+	<bean id="candidateContainerDAO" parent="candidateContainerDAOBase"></bean>
+	
+
+	<bean id="candidateElementDAOBase" class="com.cla.sds.candidateelement.CandidateElementJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="candidateContainerDAO" ref="candidateContainerDAO" />
+	</bean>
+	<bean id="candidateElementDAO" parent="candidateElementDAOBase"></bean>
+	
+
+	<bean id="wechatWorkappIdentityDAOBase" class="com.cla.sds.wechatworkappidentity.WechatWorkappIdentityJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="wechatWorkappIdentityDAO" parent="wechatWorkappIdentityDAOBase"></bean>
+	
+
+	<bean id="wechatMiniappIdentityDAOBase" class="com.cla.sds.wechatminiappidentity.WechatMiniappIdentityJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="wechatMiniappIdentityDAO" parent="wechatMiniappIdentityDAOBase"></bean>
+	
+
+	<bean id="keypairIdentityDAOBase" class="com.cla.sds.keypairidentity.KeypairIdentityJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="publicKeyTypeDAO" ref="publicKeyTypeDAO" /><property name="secUserDAO" ref="secUserDAO" />
+	</bean>
+	<bean id="keypairIdentityDAO" parent="keypairIdentityDAOBase"></bean>
+	
+
+	<bean id="publicKeyTypeDAOBase" class="com.cla.sds.publickeytype.PublicKeyTypeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" /><property name="userDomainDAO" ref="userDomainDAO" />
+		<property name="keypairIdentityDAO" ref="keypairIdentityDAO" />
+		
+	</bean>
+	<bean id="publicKeyTypeDAO" parent="publicKeyTypeDAOBase"></bean>
+	
+
+	<bean id="treeNodeDAOBase" class="com.cla.sds.treenode.TreeNodeJDBCTemplateDAO">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="treeNodeDAO" parent="treeNodeDAOBase"></bean>
+	
+
+
+	<bean id="DAOGroupBase" class="com.cla.sds.DAOGroup">
+		<property name="platformDAO" ref="platformDAO"/>
+		<property name="companyDAO" ref="companyDAO"/>
+		<property name="userDAO" ref="userDAO"/>
+		<property name="userProjectDAO" ref="userProjectDAO"/>
+		<property name="changeRequestTypeDAO" ref="changeRequestTypeDAO"/>
+		<property name="changeRequestDAO" ref="changeRequestDAO"/>
+		<property name="eventUpdateProfileDAO" ref="eventUpdateProfileDAO"/>
+		<property name="projectDAO" ref="projectDAO"/>
+		<property name="pageFlowSpecDAO" ref="pageFlowSpecDAO"/>
+		<property name="workFlowSpecDAO" ref="workFlowSpecDAO"/>
+		<property name="changeRequestSpecDAO" ref="changeRequestSpecDAO"/>
+		<property name="pageContentSpecDAO" ref="pageContentSpecDAO"/>
+		<property name="mobileAppDAO" ref="mobileAppDAO"/>
+		<property name="pageDAO" ref="pageDAO"/>
+		<property name="pageTypeDAO" ref="pageTypeDAO"/>
+		<property name="slideDAO" ref="slideDAO"/>
+		<property name="uiActionDAO" ref="uiActionDAO"/>
+		<property name="sectionDAO" ref="sectionDAO"/>
+		<property name="userDomainDAO" ref="userDomainDAO"/>
+		<property name="userWhiteListDAO" ref="userWhiteListDAO"/>
+		<property name="secUserDAO" ref="secUserDAO"/>
+		<property name="userAppDAO" ref="userAppDAO"/>
+		<property name="quickLinkDAO" ref="quickLinkDAO"/>
+		<property name="listAccessDAO" ref="listAccessDAO"/>
+		<property name="loginHistoryDAO" ref="loginHistoryDAO"/>
+		<property name="candidateContainerDAO" ref="candidateContainerDAO"/>
+		<property name="candidateElementDAO" ref="candidateElementDAO"/>
+		<property name="wechatWorkappIdentityDAO" ref="wechatWorkappIdentityDAO"/>
+		<property name="wechatMiniappIdentityDAO" ref="wechatMiniappIdentityDAO"/>
+		<property name="keypairIdentityDAO" ref="keypairIdentityDAO"/>
+		<property name="publicKeyTypeDAO" ref="publicKeyTypeDAO"/>
+		<property name="treeNodeDAO" ref="treeNodeDAO"/>
+	</bean>
+	<bean id="DAOGroup" parent="DAOGroupBase"></bean>
+</beans>
+
+
+
+
+<!--
+
+	各种候选配置，可以选择你更为熟悉的类型
+	Creating TransactionManager Bean, since JDBC we are creating of type
+		DataSourceTransactionManager
+
+		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <property name="poolName" value="mercatus_connection_pool" />
+	  <property name="dataSourceClassName" value="com.mysql.cj.jdbc.MysqlDataSource"/>
+	  <property name="maximumPoolSize" value="50" />
+	  <property name="maxLifetime" value="60000" />
+	  <property name="idleTimeout" value="30000" />
+	  <property name="dataSourceProperties">
+	   <props>
+	     <prop key="url">${app.database.jdbcURL}</prop>
+	     <prop key="user">${app.database.username}</prop>
+	     <prop key="password">${app.database.password}</prop>
+	     <prop key="prepStmtCacheSize">250</prop>
+	     <prop key="prepStmtCacheSqlLimit">2048</prop>
+	     <prop key="cachePrepStmts">true</prop>
+	     <prop key="useServerPrepStmts">true</prop>
+	   </props>
+	  </property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" >
+
+		<property name="url" value="${app.database.jdbcURL}" />
+		<property name="username" value="${app.database.username}" />
+		<property name="password" value="${app.database.password}" />
+		<property name="driverClassName" value="${app.database.driverClass}" />
+		<property name="initialSize" value="${app.database.pool.initialSize}" />
+		<property name="maxTotal" value="${app.database.pool.maxActive}" />
+
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="SELECT 1 from sec_user_data" />
+		<property name="removeAbandonedTimeout" value="55" />
+		<property name="removeAbandonedOnBorrow" value="true"/>
+
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close" >
+
+		<property name="jdbcUrl" value="${app.database.jdbcURL}" />
+		<property name="user" value="${app.database.username}" />
+		<property name="password" value="${app.database.password}" />
+		<property name="driverClass" value="${app.database.driverClass}" />
+
+  		<property name="minPoolSize" value="10"/>
+  		<property name="maxPoolSize" value="50"/>
+  		<property name="acquireIncrement" value="1"/>
+  		<property name="idleConnectionTestPeriod" value="1000"/>
+  		<property name="maxStatements" value="250"/>
+  		<property name="checkoutTimeout" value="60000"/>
+  		<property name="initialPoolSize" value="10" />
+
+	</bean>
+
+
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+	  <property name="poolName" value="mercatus_connection_pool" />
+	  <property name="dataSourceClassName" value="${app.database.dataSourceClassName}"/>
+	  <property name="maximumPoolSize" value="50" />
+	  <property name="maxLifetime" value="60000" />
+	  <property name="idleTimeout" value="30000" />
+	  <property name="dataSourceProperties">
+	   <props>
+	     <prop key="url">${app.database.jdbcURL}</prop>
+	     <prop key="user">${app.database.username}</prop>
+	     <prop key="password">${app.database.password}</prop>
+	     <prop key="prepStmtCacheSize">250</prop>
+	     <prop key="prepStmtCacheSqlLimit">2048</prop>
+	     <prop key="cachePrepStmts">true</prop>
+	     <prop key="useServerPrepStmts">true</prop>
+	   </props>
+	  </property>
+	</bean>
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	  <constructor-arg ref="hikariConfig" />
+	</bean>
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

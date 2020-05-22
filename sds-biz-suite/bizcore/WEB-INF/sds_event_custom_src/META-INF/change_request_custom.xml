@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<import resource="classpath*:/META-INF/change_request_core.xml" />
+	<bean id="changeRequestService" class="com.cla.sds.changerequest.ChangeRequestCustomService" >
+		<property name="defaultHandler" ref="changeRequestBaseHandler"/>
+	</bean>
+	<bean id="updateProfileHandler" class="com.cla.sds.changerequest.UpdateProfileCustomHandler" ></bean>
+	<bean id="eventUpdateProfileProcessor" class="com.cla.sds.changerequest.EventUpdateProfileCustomProcessor" ></bean>
+
+</beans>
+

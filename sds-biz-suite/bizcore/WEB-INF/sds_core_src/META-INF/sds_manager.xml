@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<bean id="checker" class="com.cla.sds.SdsObjectChecker" scope="prototype"></bean>
+
+	<bean id="platformManagerBase" class="com.cla.sds.platform.PlatformManagerImpl"/>
+	<bean id="platformManager" class="com.cla.sds.platform.PlatformCustomManagerImpl" parent="platformManagerBase" ></bean>
+	
+	<bean id="companyManagerBase" class="com.cla.sds.company.CompanyManagerImpl"/>
+	<bean id="companyManager" class="com.cla.sds.company.CompanyCustomManagerImpl" parent="companyManagerBase" ></bean>
+	
+	<bean id="userManagerBase" class="com.cla.sds.user.UserManagerImpl"/>
+	<bean id="userManager" class="com.cla.sds.user.UserCustomManagerImpl" parent="userManagerBase" ></bean>
+	
+	<bean id="userProjectManagerBase" class="com.cla.sds.userproject.UserProjectManagerImpl"/>
+	<bean id="userProjectManager" class="com.cla.sds.userproject.UserProjectManagerImpl" parent="userProjectManagerBase" ></bean>
+	
+	<bean id="changeRequestTypeManagerBase" class="com.cla.sds.changerequesttype.ChangeRequestTypeManagerImpl"/>
+	<bean id="changeRequestTypeManager" class="com.cla.sds.changerequesttype.ChangeRequestTypeManagerImpl" parent="changeRequestTypeManagerBase" ></bean>
+	
+	<bean id="changeRequestManagerBase" class="com.cla.sds.changerequest.ChangeRequestManagerImpl"/>
+	<bean id="changeRequestManager" class="com.cla.sds.changerequest.ChangeRequestManagerImpl" parent="changeRequestManagerBase" ></bean>
+	
+	<bean id="eventUpdateProfileManagerBase" class="com.cla.sds.eventupdateprofile.EventUpdateProfileManagerImpl"/>
+	<bean id="eventUpdateProfileManager" class="com.cla.sds.eventupdateprofile.EventUpdateProfileManagerImpl" parent="eventUpdateProfileManagerBase" ></bean>
+	
+	<bean id="projectManagerBase" class="com.cla.sds.project.ProjectManagerImpl"/>
+	<bean id="projectManager" class="com.cla.sds.project.ProjectCustomManagerImpl" parent="projectManagerBase" ></bean>
+	
+	<bean id="pageFlowSpecManagerBase" class="com.cla.sds.pageflowspec.PageFlowSpecManagerImpl"/>
+	<bean id="pageFlowSpecManager" class="com.cla.sds.pageflowspec.PageFlowSpecManagerImpl" parent="pageFlowSpecManagerBase" ></bean>
+	
+	<bean id="workFlowSpecManagerBase" class="com.cla.sds.workflowspec.WorkFlowSpecManagerImpl"/>
+	<bean id="workFlowSpecManager" class="com.cla.sds.workflowspec.WorkFlowSpecManagerImpl" parent="workFlowSpecManagerBase" ></bean>
+	
+	<bean id="changeRequestSpecManagerBase" class="com.cla.sds.changerequestspec.ChangeRequestSpecManagerImpl"/>
+	<bean id="changeRequestSpecManager" class="com.cla.sds.changerequestspec.ChangeRequestSpecManagerImpl" parent="changeRequestSpecManagerBase" ></bean>
+	
+	<bean id="pageContentSpecManagerBase" class="com.cla.sds.pagecontentspec.PageContentSpecManagerImpl"/>
+	<bean id="pageContentSpecManager" class="com.cla.sds.pagecontentspec.PageContentSpecManagerImpl" parent="pageContentSpecManagerBase" ></bean>
+	
+	<bean id="mobileAppManagerBase" class="com.cla.sds.mobileapp.MobileAppManagerImpl"/>
+	<bean id="mobileAppManager" class="com.cla.sds.mobileapp.MobileAppCustomManagerImpl" parent="mobileAppManagerBase" ></bean>
+	
+	<bean id="pageManagerBase" class="com.cla.sds.page.PageManagerImpl"/>
+	<bean id="pageManager" class="com.cla.sds.page.PageCustomManagerImpl" parent="pageManagerBase" ></bean>
+	
+	<bean id="pageTypeManagerBase" class="com.cla.sds.pagetype.PageTypeManagerImpl"/>
+	<bean id="pageTypeManager" class="com.cla.sds.pagetype.PageTypeManagerImpl" parent="pageTypeManagerBase" ></bean>
+	
+	<bean id="slideManagerBase" class="com.cla.sds.slide.SlideManagerImpl"/>
+	<bean id="slideManager" class="com.cla.sds.slide.SlideManagerImpl" parent="slideManagerBase" ></bean>
+	
+	<bean id="uiActionManagerBase" class="com.cla.sds.uiaction.UiActionManagerImpl"/>
+	<bean id="uiActionManager" class="com.cla.sds.uiaction.UiActionManagerImpl" parent="uiActionManagerBase" ></bean>
+	
+	<bean id="sectionManagerBase" class="com.cla.sds.section.SectionManagerImpl"/>
+	<bean id="sectionManager" class="com.cla.sds.section.SectionManagerImpl" parent="sectionManagerBase" ></bean>
+	
+	<bean id="userDomainManagerBase" class="com.cla.sds.userdomain.UserDomainManagerImpl"/>
+	<bean id="userDomainManager" class="com.cla.sds.userdomain.UserDomainCustomManagerImpl" parent="userDomainManagerBase" ></bean>
+	
+	<bean id="userWhiteListManagerBase" class="com.cla.sds.userwhitelist.UserWhiteListManagerImpl"/>
+	<bean id="userWhiteListManager" class="com.cla.sds.userwhitelist.UserWhiteListManagerImpl" parent="userWhiteListManagerBase" ></bean>
+	
+	<bean id="secUserManagerBase" class="com.cla.sds.secuser.SecUserManagerImpl"/>
+	<bean id="secUserManager" class="com.cla.sds.secuser.SecUserCustomManagerImpl" parent="secUserManagerBase" ></bean>
+	
+	<bean id="userAppManagerBase" class="com.cla.sds.userapp.UserAppManagerImpl"/>
+	<bean id="userAppManager" class="com.cla.sds.userapp.UserAppCustomManagerImpl" parent="userAppManagerBase" ></bean>
+	
+	<bean id="quickLinkManagerBase" class="com.cla.sds.quicklink.QuickLinkManagerImpl"/>
+	<bean id="quickLinkManager" class="com.cla.sds.quicklink.QuickLinkManagerImpl" parent="quickLinkManagerBase" ></bean>
+	
+	<bean id="listAccessManagerBase" class="com.cla.sds.listaccess.ListAccessManagerImpl"/>
+	<bean id="listAccessManager" class="com.cla.sds.listaccess.ListAccessManagerImpl" parent="listAccessManagerBase" ></bean>
+	
+	<bean id="loginHistoryManagerBase" class="com.cla.sds.loginhistory.LoginHistoryManagerImpl"/>
+	<bean id="loginHistoryManager" class="com.cla.sds.loginhistory.LoginHistoryManagerImpl" parent="loginHistoryManagerBase" ></bean>
+	
+	<bean id="candidateContainerManagerBase" class="com.cla.sds.candidatecontainer.CandidateContainerManagerImpl"/>
+	<bean id="candidateContainerManager" class="com.cla.sds.candidatecontainer.CandidateContainerManagerImpl" parent="candidateContainerManagerBase" ></bean>
+	
+	<bean id="candidateElementManagerBase" class="com.cla.sds.candidateelement.CandidateElementManagerImpl"/>
+	<bean id="candidateElementManager" class="com.cla.sds.candidateelement.CandidateElementManagerImpl" parent="candidateElementManagerBase" ></bean>
+	
+	<bean id="wechatWorkappIdentityManagerBase" class="com.cla.sds.wechatworkappidentity.WechatWorkappIdentityManagerImpl"/>
+	<bean id="wechatWorkappIdentityManager" class="com.cla.sds.wechatworkappidentity.WechatWorkappIdentityManagerImpl" parent="wechatWorkappIdentityManagerBase" ></bean>
+	
+	<bean id="wechatMiniappIdentityManagerBase" class="com.cla.sds.wechatminiappidentity.WechatMiniappIdentityManagerImpl"/>
+	<bean id="wechatMiniappIdentityManager" class="com.cla.sds.wechatminiappidentity.WechatMiniappIdentityManagerImpl" parent="wechatMiniappIdentityManagerBase" ></bean>
+	
+	<bean id="keypairIdentityManagerBase" class="com.cla.sds.keypairidentity.KeypairIdentityManagerImpl"/>
+	<bean id="keypairIdentityManager" class="com.cla.sds.keypairidentity.KeypairIdentityManagerImpl" parent="keypairIdentityManagerBase" ></bean>
+	
+	<bean id="publicKeyTypeManagerBase" class="com.cla.sds.publickeytype.PublicKeyTypeManagerImpl"/>
+	<bean id="publicKeyTypeManager" class="com.cla.sds.publickeytype.PublicKeyTypeManagerImpl" parent="publicKeyTypeManagerBase" ></bean>
+	
+	<bean id="treeNodeManagerBase" class="com.cla.sds.treenode.TreeNodeManagerImpl"/>
+	<bean id="treeNodeManager" class="com.cla.sds.treenode.TreeNodeCustomManagerImpl" parent="treeNodeManagerBase" ></bean>
+	
+
+	<bean id="managerGroupBase" class="com.cla.sds.ManagerGroup">
+		<property name="platformManager" ref="platformManager"/>
+		<property name="companyManager" ref="companyManager"/>
+		<property name="userManager" ref="userManager"/>
+		<property name="userProjectManager" ref="userProjectManager"/>
+		<property name="changeRequestTypeManager" ref="changeRequestTypeManager"/>
+		<property name="changeRequestManager" ref="changeRequestManager"/>
+		<property name="eventUpdateProfileManager" ref="eventUpdateProfileManager"/>
+		<property name="projectManager" ref="projectManager"/>
+		<property name="pageFlowSpecManager" ref="pageFlowSpecManager"/>
+		<property name="workFlowSpecManager" ref="workFlowSpecManager"/>
+		<property name="changeRequestSpecManager" ref="changeRequestSpecManager"/>
+		<property name="pageContentSpecManager" ref="pageContentSpecManager"/>
+		<property name="mobileAppManager" ref="mobileAppManager"/>
+		<property name="pageManager" ref="pageManager"/>
+		<property name="pageTypeManager" ref="pageTypeManager"/>
+		<property name="slideManager" ref="slideManager"/>
+		<property name="uiActionManager" ref="uiActionManager"/>
+		<property name="sectionManager" ref="sectionManager"/>
+		<property name="userDomainManager" ref="userDomainManager"/>
+		<property name="userWhiteListManager" ref="userWhiteListManager"/>
+		<property name="secUserManager" ref="secUserManager"/>
+		<property name="userAppManager" ref="userAppManager"/>
+		<property name="quickLinkManager" ref="quickLinkManager"/>
+		<property name="listAccessManager" ref="listAccessManager"/>
+		<property name="loginHistoryManager" ref="loginHistoryManager"/>
+		<property name="candidateContainerManager" ref="candidateContainerManager"/>
+		<property name="candidateElementManager" ref="candidateElementManager"/>
+		<property name="wechatWorkappIdentityManager" ref="wechatWorkappIdentityManager"/>
+		<property name="wechatMiniappIdentityManager" ref="wechatMiniappIdentityManager"/>
+		<property name="keypairIdentityManager" ref="keypairIdentityManager"/>
+		<property name="publicKeyTypeManager" ref="publicKeyTypeManager"/>
+		<property name="treeNodeManager" ref="treeNodeManager"/>
+	</bean>
+	<bean id="managerGroup" parent="managerGroupBase"></bean>
+	
+
+
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

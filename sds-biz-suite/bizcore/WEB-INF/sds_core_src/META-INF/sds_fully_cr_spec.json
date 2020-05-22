@@ -1,0 +1,56 @@
+{
+  "name": "frontendpoc",
+  "changeRequestList": [
+    {
+      "requestPrefix": "clientService/handleCR/",
+      "needLogin": true,
+      "icon": "bars",
+      "stepList": [
+        {
+          "eventList": [
+            {
+              "name": "update profile",
+              "multiple": false,
+              "mustHave": true,
+              "eventType": "update profile",
+              "title": "更新个人信息",
+              "fieldList": [
+                {
+                  "minimal": "1",
+                  "interactionMode": "input",
+                  "uiStyle": "text",
+                  "sampleData": "name|用户名",
+                  "selectable": "not_selectable",
+                  "name": "name",
+                  "maximum": "30",
+                  "mustHave": true,
+                  "inputType": "string",
+                  "title": "用户名"
+                },
+                {
+                  "minimal": "0",
+                  "interactionMode": "input",
+                  "uiStyle": "image",
+                  "sampleData": "avantar.jpg",
+                  "selectable": "not_selectable",
+                  "name": "avantar",
+                  "maximum": "1",
+                  "mustHave": true,
+                  "inputType": "image",
+                  "title": "头像"
+                }
+              ]
+            }
+          ],
+          "name": "update profile",
+          "index": 1,
+          "canSkip": false,
+          "title": "更新个人信息"
+        }
+      ],
+      "title": "更新个人信息",
+      "shortName": "up",
+      "changeRequestType": "update profile"
+    }
+  ]
+}

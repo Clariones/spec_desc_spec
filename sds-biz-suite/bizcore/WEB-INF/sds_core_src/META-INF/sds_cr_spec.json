@@ -1,0 +1,56 @@
+{	
+	"name":"frontendpoc",
+	"title":"frontendpoc",
+	"crSpecs":{ 
+		"UPDATE_PROFILE" :{
+			"name":"update profile",
+			"title":"更新个人信息",
+			"brief":null,
+			"changeRequestType":"UPDATE_PROFILE",
+			"requestPrefix": "clientService/handleCR/",
+			"sceneList":[
+				{
+					"name":"updateProfile",
+					"title":"更新个人信息",
+					"index":1,
+					"canSkip":false,
+					"groups":[
+						{
+							"name":"upUpdateProfile_updateProfile",
+							"title":"更新个人信息",
+							"modelName":"update profile",
+							"multiple": false,
+              				"mustHave": true
+						}
+					]
+				}
+			],
+			"fieldList":[
+				{
+				  "interactionMode": "input",
+				  "uiStyle": "text",
+				  "sampleData": "name|用户名",
+				  "selectable": "not_selectable",
+				  "name": "upUpdateProfile_updateProfile_name",
+				  "maximum": "30",
+				  "label": "用户名",
+				  "type": "string",
+				  "minimum": "1",
+				  "required": true
+				},
+				{
+				  "interactionMode": "input",
+				  "uiStyle": "image",
+				  "sampleData": "avantar.jpg",
+				  "selectable": "not_selectable",
+				  "name": "upUpdateProfile_updateProfile_avantar",
+				  "maximum": "1",
+				  "label": "头像",
+				  "type": "image",
+				  "minimum": "0",
+				  "required": true
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,107 @@
+<root
+    org="cla"
+    chinese_name="规规格"
+    english_name="Specification Descriptor Specification"
+    cfg_analyze_all_lists_token="false"
+    cfg_mask_china_mobile="false"
+    cfg_language="Chinese"
+    cfg_payment_service="none">
+
+  <!-- 有部分xml暂时移入 not_used_for_now, 业务部分整理完成后,会再加回来 -->
+  <platform
+      name="规规格管理平台"
+      create_time="createTime()"
+      last_update_time="updateTime()"
+      />
+
+  <company
+      name="XX公司"
+      create_time="createTime()"
+      platform="$(platform)"
+      />
+
+  <user
+      name="X先生"
+      join_time="2199-01-01"
+      company="$(company)"
+      title="BA|Leader|Coder"
+      _features="merchant"
+      />
+
+  <user_project
+      user="$(user)"
+      project="$(project)"
+      create_time="createTime()"
+      last_update_time="updateTime()"
+      />
+
+  <change_request_type
+      name="更新个人信息|[1,100]"
+      code="UPDATE_PROFILE|[1,100]"
+      icon="bars|[1,100]"
+      display_order="1|2|3|4|5|6"
+      bind_types="text()"
+      step_configuration="text()"
+      platform="$(platform)"
+      _features="cr_type"
+      _identified_by="code"
+      />
+
+  <change_request
+      name="注册|开始考试|答题|[1,50]"
+      create_time="createTime()"
+      remote_ip="remoteIp()"
+      request_type="$(change_request_type)"
+      commited="false"
+      platform="$(platform)"
+      _features="change_request"
+      />
+
+  <event_update_profile
+      name="name|用户名|[1,30]"
+      avantar="avantar.jpg|[0,1]"
+      field_group="cr_type/step_name/event_name/event_index|[5,100]"
+      event_initiator_type="SecUser|Merchant|[1,64]"
+      event_initiator_id="SU000001|M0000001|[1,64]"
+      change_request="$(change_request)"
+      _features="event"
+      _bind_with_cr_type="UPDATE_PROFILE"
+      />
+
+  <project
+      name="X项目"
+      company="$(company)"
+      />
+
+  <page_flow_spec
+      scene="登录"
+      brief="text()"
+      owner="$(user)"
+      project="$(project)"
+      />
+
+  <work_flow_spec
+      scene="登录"
+      brief="text()"
+      owner="$(user)"
+      project="$(project)"
+      />
+
+  <change_request_spec
+      scene="登录"
+      brief="text()"
+      owner="$(user)"
+      project="$(project)"
+      />
+
+  <page_content_spec
+      scene="登录"
+      brief="text()"
+      owner="$(user)"
+      project="$(project)"
+      />
+
+</root>
+
+
+
