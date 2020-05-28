@@ -9,13 +9,20 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/debug.css" />
     <link rel="stylesheet" href="./css/frame_layout.css" />
+    
+    <script src="./js/require.js" data-main="js/pageFlowMain.js?v=3"></script>
+    
+    <!--
     <script src="./js/jquery-3.5.1.min.js"></script>
     <script src="./js/jquery-ui.min.js"></script>
-
     <script src="./js/common.js"></script>
+    <script src="./js/require.js" data-main="./js/PageFlowMaster.js?t=1"></script>
     <script src="./js/BaseMaster.js"></script>
     <script src="./js/PageFlowMaster.js"></script>
+    <script src="./js/StartWayNode.js"></script>
     <script src="./js/NodeFactory.js"></script>
+    -->
+    
 
     <script src="./js/jsplumb.js"></script>
 
@@ -43,16 +50,19 @@
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         /* global jsPlumb */
         (function () {
-
+            var jsPlumb = require(["jsPlumb"]);
+            console.info(jsPlumb);
             jsPlumb.ready(function () {
                 var pageFlowMaster = new sdsns.PageFlowMaster();
                 var defaultConfig = pageFlowMaster.getDefaultConfig({ type: 'jspulumb', scence: 'pageFlow' });
                 var jsplumbInstance = jsPlumb.getInstance(defaultConfig);
-                pageFlowMaster.loadData("prj00001","scene0002");
+                pageFlowMaster.initWorkSpace(jsplumbInstance);
+                pageFlowMaster.loadData("prj00001","PFS000001");
                 pageFlowMaster.repaintAll();
+                pageFlowMaster.log("test");
                 // Main.initOnLoad({instance: jsplumbInstance, scence: 'pageFlow', resource:'prjXXX/pageFlow/partYYY'});
                 // jsPlumb.makeSource('item_left', {
                 //     endpoint: ["Dot", {radius: 3}],
@@ -93,7 +103,7 @@
                 // })
             });
         })();
-    </script>
+    </script> -->
 </body>
 
 </html>

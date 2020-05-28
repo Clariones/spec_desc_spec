@@ -1,18 +1,10 @@
-;
-var sdsns = window.sdsns || {};
-
-sdsns.BaseMaster = function() {
+'use strict';
+var base = function () {
     var me = this;
-    me.graphData = {comments:'没初始化'};
+    console.log("base was created");
 
-    me.log = function(message) {
-        console.log("[     LOG]" + message);
-    }
-};
-
-
-(function(){
-    sdsns.BaseMaster.prototype.getDefaultConfig = function() {
+    me.getDefaultConfig = function() {
+        console.log("return default configuration from baseMaster");
         return {
             DragOptions: { cursor: 'pointer', zIndex: 2000 },
             PaintStyle: { stroke: '#666' , strokeWidth: 2 },
@@ -26,17 +18,43 @@ sdsns.BaseMaster = function() {
         };
     };
 
-    // sdsns.BaseMaster.prototype.log = function(message) {
-    //     console.log(message);
-    // }
+    
+    
+};
 
-    sdsns.BaseMaster.prototype.loadDataFromServer = function(typeName, projectId, sceneId) {
-        this.log("加载项目"+projectId+"/场景"+sceneId+"的"+typeName+"数据");
-        this.graphData = {typeName: typeName, projectId:projectId};
+
+
+define([
+    'require', 'jquery', 'common'
+], function (require, $, SDS) {
+    'use strict';
+    console.log("base-define");
+
+    base.prototype.initWorkSpace = function (jpbInstance) {
+        var me = this;
+        console.log("initWorkSpace by baseMaster");
+        me.jsplumbInstance = jpbInstance;
+        $("#drawing_pannel").droppable({
+            scope: "sds",
+            // drop: function (event, ui) {
+            //     var left = parseInt(ui.offset.left - $(this).offset().left);
+            //     var top = parseInt(ui.offset.top - $(this).offset().top);
+            //     me.addNodeInDrawingPannel(left, top, ui.draggable[0]);
+            // }
+        });
+
+        me.jsplumbInstance.bind("beforeDrop", function (params) {
+            console.log(params.sourceId + "->" + params.targetId);
+            // params.source is the element from which the new connection is being dragged
+            // params.endpoint is the associated endpoint
+
+            // connect(params.sourceId, params.targetId);
+            return false;
+
+        });
+
+        me.afterInitWorkSpace();
     };
 
-    sdsns.BaseMaster.prototype.repaintAll = function() {
-        this.log("开始重绘" + this.getTypeName()+"的数据")
-    };
-
-})();
+    return base;
+});

@@ -1,28 +1,35 @@
-;
-var sdsns = window.sdsns || {};
+'use strict';
 
-sdsns.PageFlowMaster = function() {
-    sdsns.BaseMaster.call(this);
+var pageFlowMaster = function() {
+    var me = this;
+    pageFlowMaster.uber.constructor.apply(this);
+    console.log("pageFlowMaster was created");
+
 };
 
-sdsns.extend(sdsns.PageFlowMaster, sdsns.BaseMaster);
+define([
+    'require','jquery', 'common', 'baseMaster'
+], function(require, $, SDS, Base) {
+    'use strict';
 
-function dump(obj) {
-    console.log(JSON.stringify(obj));
-};
+    console.log("pageFlowMaster-define");
+    SDS.extend(pageFlowMaster, Base);
+   
+    // pageFlowMaster.prototype.initWorkSpace = function(jpbInstance) {
+    //     pageFlowMaster.uber.initWorkSpace.apply(this, [jpbInstance]);
+    //     console.log("initWorkSpace by pageFlowMaster");        
+    // };
 
-(function(){
-    sdsns.PageFlowMaster.prototype.loadData = function(projectId, sceneId) {
-        this.loadDataFromServer("pageFlow", projectId, sceneId);
-        this.dumpGraphData();
+    pageFlowMaster.prototype.afterInitWorkSpace = function(jpbInstance) {
+        console.log("after initWorkSpace by pageFlowMaster");
+        this.jsplumbInstance.connect({
+            source: 'item_left',
+            target: 'item_right'
+        });
+
+        this.jsplumbInstance.draggable('item_left');
+        this.jsplumbInstance.draggable('item_right');
     };
 
-    sdsns.PageFlowMaster.prototype.dumpGraphData = function() {
-        this.log("当前数据："+JSON.stringify(this.graphData))
-    };
-
-    sdsns.PageFlowMaster.prototype.getTypeName = function() {
-        return "页面流";
-    };
-
-})();
+    return pageFlowMaster;
+});

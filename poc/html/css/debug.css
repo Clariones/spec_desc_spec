@@ -27,3 +27,20 @@
 .jtk-endpoint {
     top: -10px;
 }
+
+.element_startWay {
+    width: 120px;
+    height: 60px;
+    text-align: center;
+    margin: auto;
+    border-radius: 16px;
+}
+
+.element_page {
+    width: 100px;
+    height: 140px;
+    text-align: center;
+    margin: auto;
+    /* border-top-right-radius: 16px; */
+    background: linear-gradient(-135deg,#58a 0, transparent 10px);
+}

@@ -1,9 +1,19 @@
-var sdsns = window.sdsns || {};
+define(function(){
+    console.log("common-define");
 
-sdsns.extend = function(Child, Parent) {
-	var F = function(){};
-	F.prototype = Parent.prototype;
-	Child.prototype = new F();
-	Child.prototype.constructor = Child;
-	Child.uber = Parent.prototype;
-};
+    if (!window.SDS) {
+        window.SDS = {};
+    }
+    var SDS = window.SDS;
+
+    SDS.extend = function(childFunc, parentFunc) {
+        var F = function(){};
+        F.prototype = parentFunc.prototype;
+        childFunc.prototype = new F();
+        childFunc.prototype.constructor = childFunc;
+        childFunc.uber = parentFunc.prototype;
+    };
+
+    return SDS;
+    
+});
