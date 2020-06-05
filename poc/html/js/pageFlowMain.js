@@ -19,12 +19,19 @@ console.log("开始");
 define(['require', 'pageFlowMaster', 'jsPlumb'], function (require, Master, jsPlumb) {
     console.log("pageFlowMain-define");
 
-    var master = new Master();
+    return {
+        start:function(sceneType, sceneId) {
+            console.log("pageFlowMain-start")
+            console.log(arguments);
+            var master = new Master();
     
-    // console.log(jsPlumb);
-    jsPlumb.ready(function () {
-        var defaultConfig = master.getDefaultConfig({type: 'jspulumb', scence: 'pageFlow'});
-        var jsplumbInstance = jsPlumb.getInstance(defaultConfig);
-        master.initWorkSpace(jsplumbInstance);
-    });
+            // console.log(jsPlumb);
+            jsPlumb.ready(function () {
+                var defaultConfig = master.getDefaultConfig({type: 'jspulumb', scence: 'pageFlow'});
+                var jsplumbInstance = jsPlumb.getInstance(defaultConfig);
+                master.initWorkSpace(jsplumbInstance);
+            });
+        }
+    };
+    
 });

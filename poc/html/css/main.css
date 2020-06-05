@@ -60,17 +60,14 @@ body {
     display: inline-block;
     margin: 5px 5px 3px 5px;
 }
-.node_item {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border: 1px solid blue;
-}
 
-.node_start_way {
-    border-radius: 50%;
-}
-.node_page {
-    border-top-right-radius: 15px;
-}
 
+.image_endpoint {
+    height: 20px !important;
+    width: 20px !important;
+    /* border: 1px solid black; */
+    background-image: url('../icons/icon_link.svg') !important;
+    background-size: 20px 20px !important;
+    background-repeat: no-repeat !important;
+    background-position: unset !important;
+}

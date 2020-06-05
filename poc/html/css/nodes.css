@@ -1,0 +1,62 @@
+.node_item {
+    font-size: 14px;
+    /* border: 1px dashed #739be9; */
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+    overflow-x: visible;
+    position: absolute;
+    background-color: transparent;
+}
+
+.node_startWay {
+    width: 60px;
+}
+.node_startWay img{
+    width: 60px;
+    height: 40px;
+}
+.node_startWay label{
+    font-size: 120%;
+    position: absolute;
+    top: 43px;
+    text-align: center;
+    word-break: keep-all;
+}
+.node_startWay span {
+    font-size: 80%;
+    position: absolute;
+    display: none;
+}
+
+.node_request {
+    width: 40px;
+}
+.node_request img{
+    width: 40px;
+    height: 38px;
+}
+.node_request label{
+    /* font-size: 100%; */
+    position: absolute;
+    top: -20px;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.node_page {
+    width: 55px;
+}
+.node_page img{
+    width: 60px;
+    height: 55px;
+}
+.node_page label{
+    font-size: 120%;
+    position: absolute;
+    top: -20px;
+    text-align: center;
+    word-break: keep-all;
+}

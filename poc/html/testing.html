@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="./css/nodes.css" />
+ 
+    <title>元素展示</title>
+
+    <style>
+.item_example_container {
+    margin: 20px;
+    padding: 0;
+    display: inline-block;
+    border: 1px solid #b0b9bd;
+    background-color: #ececec; /* #b0b9bd; */
+    border-radius: 8px;
+}
+
+.item_example_container h2 {
+    background-color: white;
+    margin: 0;
+    padding: 0 10px;
+    border-radius: 8px 8px 0 0 ;
+}
+.item_example_container .node_item {
+    margin: 20px;
+    /* background-image: url('./icons/bg-grid1.jpeg');
+    background-size: 300px 270px;
+    background-repeat: repeat; */
+}
+    </style>
+</head>
+
+<body>
+
+    <div class="item_example_container">
+        <h2>起点：Start Way</h2>
+        <div class="node_item node_startWay">
+            <img src="./icons/icon_actor.svg"></img>
+            <label>打开小程序</label>
+            <span>用户从微信，或者分享中打开小程序</span>
+        </div>
+    </div>
+    <p></p>
+    <div class="item_example_container">
+        <h2>请求：Request</h2>
+        <div class="node_item node_request">
+            <label>查看首页</label>
+            <img src="./icons/icon_request.svg"></img>
+        </div>
+    </div>
+    <p></p>
+    <div class="item_example_container">
+        <h2>页面：Page</h2>
+        <div class="node_item node_page">
+            <label>首页</label>
+            <img src="./icons/icon_page.svg"></img>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -14,6 +14,12 @@ define(function(){
         childFunc.uber = parentFunc.prototype;
     };
 
+    SDS.dump = function(object) {
+        for(var x in object) {
+            console.log(x +"=" + object[x]);
+        }
+    }
+
     return SDS;
     
 });
